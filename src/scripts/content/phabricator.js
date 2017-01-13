@@ -21,7 +21,8 @@ togglbutton.render('#phabricator-standard-page-body .phui-workpanel-view .phui-o
 // Task detail view
 togglbutton.render('#phabricator-standard-page-body:not(.toggl)', {observe: true}, function (elem) {
   var link,
-    desc = elem.querySelector(".phui-two-column-header .phui-header-view .phui-header-header"),
+    // desc = elem.querySelector(".phui-two-column-header .phui-header-view .phui-header-header"),
+    desc = elem.querySelector(".phui-header-view"),
     number = $('.phabricator-last-crumb .phui-crumb-name') || "",
     projectName = $('.phabricator-handle-tag-list-item > a');
 
@@ -33,9 +34,9 @@ togglbutton.render('#phabricator-standard-page-body:not(.toggl)', {observe: true
 
   link = togglbutton.createTimerLink({
     className: 'phabricator',
-    description: number + desc.textContent,
+    description: number + desc.innerText.split('\n')[0],
     projectName: projectName
   });
 
-  desc.appendChild(link);
+  $('.phui-header-subheader').appendChild(link);
 });
